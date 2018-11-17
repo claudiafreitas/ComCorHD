@@ -1,0 +1,37 @@
+#COMANDOS, INSTRUÇÕES E EXEMPLOS DO GITHUB (do ALEXANDRE)
+
+#Para saber onde estão as versoes anteriores: 
+Ir no "master" -->  releases. Depois, selecionar “lá em cima na tela” para TAGS (botao azul). A ideia é que as tags indiquem releases. Por exemplo, por ali pegamos o release da versão 2.2. (Bruno vai organizar isso)
+
+#Para descobrir as frases que aparecem na página de stats (http://universaldependencies.org/treebanks/pt_bosque/) e que correspondem às estruturas indicadas. 
+Por exemplo, a partir dessa página http://universaldependencies.org/treebanks/pt_bosque/pt_bosque-dep-advmod.html , queremos saber quais são os casos de relação advmod entre ADJ (núcleo) e PROPN. A query que faz essa busca está em na nossa biblioteca/wiki:
+https://github.com/own-pt/cl-conllu/wiki/Queries
+
+(write-conllu-to-stream  
+		 (query '(advmod (upostag "ADJ") (upostag "PROPN")) 
+			(read-conllu "documents/")))
+
+
+
+#PARA CRIAR UM ARQUIVO UNICO DO BOSQUE-UD NA ÍNTEGRA E NA SEQUENCIA##
+O material vai estar sempre no workbench > documents
+Ainda no WORKBENCH tem diretorio "scripts" e dentro dele tem um script "join-documents"
+(https://github.com/UniversalDependencies/UD_Portuguese-Bosque/tree/workbench/scripts) 
+
+#Como operar (Alexandre):
+Estando na raiz do repositorio (lembrar de fazer update antes)
+
+No raiz do repositorio:
+
+1) para atualizar sua versão local
+
+$ git pull
+
+2) executar comando para criar ou sobrescrever o arquivo tudo.conllu
+
+$ scripts/join-documents.sh > tudo.conllu
+
+
+##Para compilar um "corpus" com todas as frases alteradas (que sofreram comit) pela Suemi. Os arquivos estão aqui: https://github.com/cpdoc/dhbb-nlp/tree/master/udp/appos
+
+$ git log --author="suemi" --name-only 
